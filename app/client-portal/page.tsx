@@ -78,13 +78,13 @@ export default async function ClientPortalPage() {
         )}
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
           <div className="bg-white rounded-lg shadow p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
               Upload Documents
             </h3>
             <p className="text-gray-600 text-sm mb-4">
-              Submit files for your ongoing services
+              Submit files for your ongoing services.
             </p>
             <Link href="/client-portal/documents">
               <Button className="w-full">Go to Documents</Button>
@@ -96,7 +96,7 @@ export default async function ClientPortalPage() {
               View Invoices
             </h3>
             <p className="text-gray-600 text-sm mb-4">
-              Track your billing and payments
+              Track your billing and payments.
             </p>
             <Link href="/client-portal/invoices">
               <Button className="w-full">Go to Invoices</Button>
@@ -105,10 +105,22 @@ export default async function ClientPortalPage() {
 
           <div className="bg-white rounded-lg shadow p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              Manage Tasks
+            </h3>
+            <p className="text-gray-600 text-sm mb-4">
+              Review project tasks and deadlines.
+            </p>
+            <Link href="/client-portal/tasks">
+              <Button className="w-full">Go to Tasks</Button>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-lg shadow p-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
               Request Service
             </h3>
             <p className="text-gray-600 text-sm mb-4">
-              Submit new service requests
+              Submit new service requests.
             </p>
             <Link href="/services">
               <Button className="w-full">Browse Services</Button>

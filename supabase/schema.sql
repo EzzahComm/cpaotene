@@ -437,6 +437,10 @@ CREATE POLICY "Admins can view all clients" ON public.clients
 
 CREATE TRIGGER set_updated_at BEFORE UPDATE ON public.clients
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+CREATE TRIGGER set_updated_at BEFORE UPDATE ON public.documents
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+CREATE TRIGGER set_updated_at BEFORE UPDATE ON public.audit_logs
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
 
 -- =============================================================================
 -- ONBOARDING REQUESTS
@@ -494,7 +498,8 @@ CREATE TABLE IF NOT EXISTS public.documents (
   description TEXT,
   uploaded_by UUID REFERENCES public.profiles(id),
   is_public BOOLEAN DEFAULT false,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 ALTER TABLE public.documents ENABLE ROW LEVEL SECURITY;
@@ -510,6 +515,159 @@ CREATE POLICY "Admins can view all documents" ON public.documents
   FOR ALL USING (
     EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role IN ('admin', 'super_admin'))
   );
+
+-- =============================================================================
+-- DOCUMENT VERSIONS
+-- =============================================================================
+CREATE TABLE IF NOT EXISTS public.document_versions (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  document_id UUID NOT NULL REFERENCES public.documents(id) ON DELETE CASCADE,
+  storage_url TEXT NOT NULL,
+  file_name TEXT NOT NULL,
+  file_type TEXT NOT NULL,
+  file_size_kb INTEGER,
+  version_number INTEGER NOT NULL DEFAULT 1,
+  uploaded_by UUID REFERENCES auth.users(id),
+  notes TEXT,
+  uploaded_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+ALTER TABLE public.document_versions ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Document versions belong to clients" ON public.document_versions
+  FOR SELECT USING (
+    EXISTS (
+      SELECT 1
+      FROM public.documents d
+      JOIN public.clients c ON c.id = d.client_id
+      WHERE d.id = document_id AND c.user_id = auth.uid()
+    )
+  );
+CREATE POLICY "Admins manage document versions" ON public.document_versions
+  FOR ALL USING (
+    EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role IN ('admin', 'super_admin'))
+  );
+
+CREATE INDEX IF NOT EXISTS idx_document_versions_document_id ON public.document_versions(document_id);
+
+-- =============================================================================
+-- AUDIT LOGS
+-- =============================================================================
+CREATE TABLE IF NOT EXISTS public.audit_logs (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  client_id UUID REFERENCES public.clients(id),
+  entity TEXT NOT NULL,
+  entity_id UUID,
+  action TEXT NOT NULL,
+  actor_id UUID REFERENCES auth.users(id),
+  details JSONB,
+  description TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+ALTER TABLE public.audit_logs ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Clients can view own audit logs" ON public.audit_logs
+  FOR SELECT USING (
+    client_id IN (SELECT id FROM public.clients WHERE user_id = auth.uid())
+    OR actor_id = auth.uid()
+  );
+CREATE POLICY "Admins can manage audit logs" ON public.audit_logs
+  FOR ALL USING (
+    EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role IN ('admin', 'super_admin'))
+  );
+
+CREATE INDEX IF NOT EXISTS idx_audit_logs_client_id ON public.audit_logs(client_id);
+CREATE INDEX IF NOT EXISTS idx_audit_logs_entity ON public.audit_logs(entity);
+
+-- =============================================================================
+-- INVOICE MANAGEMENT
+-- =============================================================================
+CREATE TABLE IF NOT EXISTS public.invoices (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  client_id UUID NOT NULL REFERENCES public.clients(id) ON DELETE CASCADE,
+  invoice_number TEXT NOT NULL UNIQUE,
+  issue_date DATE NOT NULL DEFAULT CURRENT_DATE,
+  due_date DATE,
+  status TEXT NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'sent', 'paid', 'overdue', 'cancelled')),
+  currency TEXT NOT NULL DEFAULT 'KES',
+  amount_due NUMERIC(12,2) NOT NULL DEFAULT 0,
+  amount_paid NUMERIC(12,2) NOT NULL DEFAULT 0,
+  description TEXT,
+  external_url TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public.invoice_items (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  invoice_id UUID NOT NULL REFERENCES public.invoices(id) ON DELETE CASCADE,
+  description TEXT NOT NULL,
+  quantity INTEGER NOT NULL DEFAULT 1,
+  unit_price NUMERIC(12,2) NOT NULL DEFAULT 0,
+  total_amount NUMERIC(12,2) NOT NULL DEFAULT 0,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+ALTER TABLE public.invoices ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.invoice_items ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Clients can view own invoices" ON public.invoices
+  FOR SELECT USING (
+    client_id IN (SELECT id FROM public.clients WHERE user_id = auth.uid())
+  );
+CREATE POLICY "Admins manage invoices" ON public.invoices
+  FOR ALL USING (
+    EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role IN ('admin', 'super_admin'))
+  );
+
+CREATE POLICY "Admins manage invoice items" ON public.invoice_items
+  FOR ALL USING (
+    EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role IN ('admin', 'super_admin'))
+  );
+
+CREATE INDEX IF NOT EXISTS idx_invoices_client_id ON public.invoices(client_id);
+CREATE INDEX IF NOT EXISTS idx_invoice_items_invoice_id ON public.invoice_items(invoice_id);
+
+CREATE TRIGGER set_updated_at BEFORE UPDATE ON public.invoices
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+CREATE TRIGGER set_updated_at BEFORE UPDATE ON public.invoice_items
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+-- =============================================================================
+-- CLIENT TASKS
+-- =============================================================================
+CREATE TABLE IF NOT EXISTS public.client_tasks (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  client_id UUID NOT NULL REFERENCES public.clients(id) ON DELETE CASCADE,
+  title TEXT NOT NULL,
+  description TEXT,
+  status TEXT NOT NULL DEFAULT 'open' CHECK (status IN ('open', 'in_progress', 'completed', 'blocked')),
+  priority TEXT NOT NULL DEFAULT 'medium' CHECK (priority IN ('low', 'medium', 'high', 'critical')),
+  due_date DATE,
+  assigned_to UUID REFERENCES public.profiles(id),
+  created_by UUID REFERENCES auth.users(id),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+ALTER TABLE public.client_tasks ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Clients can view own tasks" ON public.client_tasks
+  FOR SELECT USING (
+    client_id IN (SELECT id FROM public.clients WHERE user_id = auth.uid())
+  );
+CREATE POLICY "Clients can create tasks" ON public.client_tasks
+  FOR INSERT WITH CHECK (
+    client_id IN (SELECT id FROM public.clients WHERE user_id = auth.uid())
+  );
+CREATE POLICY "Admins manage tasks" ON public.client_tasks
+  FOR ALL USING (
+    EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role IN ('admin', 'super_admin'))
+  );
+
+CREATE INDEX IF NOT EXISTS idx_client_tasks_client_id ON public.client_tasks(client_id);
+CREATE TRIGGER set_updated_at BEFORE UPDATE ON public.client_tasks
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
 
 -- =============================================================================
 -- END OF SCHEMA

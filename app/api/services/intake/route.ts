@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { ServiceIntakeSchema } from "@/lib/schemas/serviceIntake";
+import { classifyOnboardingRequest } from "@/lib/ai";
 import { ZodError } from "zod";
 
 export async function POST(request: NextRequest) {
@@ -47,8 +48,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // TODO: Send email notification to admin
-    // TODO: Trigger AI agent for automated response
+    const requestId = data?.[0]?.id;
+
+    try {
+      const assessment = await classifyOnboardingRequest(validatedData);
+      if (requestId) {
+        await supabase
+          .from("onboarding_requests")
+          .update({ ai_assessment: assessment })
+          .eq("id", requestId);
+      }
+    } catch (aiError) {
+      console.error("AI assessment failed:", aiError);
+    }
 
     return NextResponse.json(
       {
