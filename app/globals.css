@@ -116,7 +116,7 @@
 
   /* Service card hover */
   .service-card {
-    @apply card-enterprise p-8 group cursor-pointer;
+    @apply card-enterprise p-8 cursor-pointer;
   }
 
   .service-card:hover {
@@ -142,7 +142,7 @@
 
   /* Insight card */
   .insight-card {
-    @apply card-enterprise overflow-hidden group cursor-pointer;
+    @apply card-enterprise overflow-hidden cursor-pointer;
   }
 
   /* Number stat */

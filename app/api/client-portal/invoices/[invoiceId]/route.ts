@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServiceClient } from "@/lib/supabase/server";
 
-export async function PATCH(request: NextRequest, { params }: { params: { invoiceId: string } }) {
+export async function PATCH(request: NextRequest) {
   try {
+    const url = new URL(request.url);
+    const segments = url.pathname.split("/").filter(Boolean);
+    const invoiceId = segments[segments.length - 1] || "";
     const body = await request.json();
     const {
       invoiceNumber,
@@ -48,6 +51,10 @@ export async function PATCH(request: NextRequest, { params }: { params: { invoic
 
     if (invoiceError || !invoiceData) {
       return NextResponse.json({ error: "Invoice not found." }, { status: 404 });
+    }
+
+    if (!invoiceId) {
+      return NextResponse.json({ error: "Missing invoice id." }, { status: 400 });
     }
 
     const updatePayload = {

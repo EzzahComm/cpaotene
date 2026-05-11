@@ -2,7 +2,8 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import InvoiceEditForm from "./InvoiceEditForm";
 
-export default async function InvoiceEditPage({ params }: { params: { invoiceId: string } }) {
+export default async function InvoiceEditPage(props: any) {
+  const { params } = props as { params: { invoiceId: string } };
   const supabase = await createClient();
 
   const {
