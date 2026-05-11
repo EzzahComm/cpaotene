@@ -45,7 +45,7 @@ export async function PATCH(request: NextRequest) {
     const { data: invoiceData, error: invoiceError } = await supabase
       .from("invoices")
       .select("id")
-      .eq("id", params.invoiceId)
+      .eq("id", invoiceId)
       .eq("client_id", clientData.id)
       .single();
 
@@ -72,7 +72,7 @@ export async function PATCH(request: NextRequest) {
     const { error: dbError } = await supabase
       .from("invoices")
       .update(updatePayload)
-      .eq("id", params.invoiceId);
+      .eq("id", invoiceId);
 
     if (dbError) {
       console.error("Invoice update error:", dbError);

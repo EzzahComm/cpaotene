@@ -60,7 +60,9 @@ export function ServiceIntakeForm({
     case SERVICE_TYPES.INTERNAL_AUDIT:
       schema = InternalAuditIntakeSchema;
       break;
-    case "management-consultancy":
+    case SERVICE_TYPES.FINANCIAL_ADVISORY:
+    case SERVICE_TYPES.GOVERNANCE_ADVISORY:
+    case SERVICE_TYPES.RISK_COMPLIANCE:
       schema = ManagementConsultancyIntakeSchema;
       break;
     default:
@@ -449,7 +451,7 @@ function ServiceSpecificFields({ serviceType, form }: any) {
                       <Checkbox
                         id={option.id}
                         checked={field.value?.includes(option.id) || false}
-                        onCheckedChange={(checked) => {
+                        onCheckedChange={(checked: boolean | string) => {
                           const updatedValue = checked
                             ? [...(field.value || []), option.id]
                             : (field.value || []).filter((v: string) => v !== option.id);
@@ -585,7 +587,7 @@ function ServiceSpecificFields({ serviceType, form }: any) {
                       <Checkbox
                         id={option.id}
                         checked={field.value?.includes(option.id) || false}
-                        onCheckedChange={(checked) => {
+                        onCheckedChange={(checked: boolean | string) => {
                           const updatedValue = checked
                             ? [...(field.value || []), option.id]
                             : (field.value || []).filter((v: string) => v !== option.id);

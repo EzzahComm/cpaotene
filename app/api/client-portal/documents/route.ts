@@ -47,12 +47,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Failed to upload file." }, { status: 500 });
     }
 
-    const { data: urlData, error: urlError } = supabase.storage
+    const { data: urlData } = supabase.storage
       .from(bucket)
       .getPublicUrl(fileName);
 
-    if (urlError || !urlData?.publicUrl) {
-      console.error("Storage URL error:", urlError);
+    if (!urlData?.publicUrl) {
+      console.error("Storage URL error: Could not generate public URL");
       return NextResponse.json({ error: "Failed to generate file URL." }, { status: 500 });
     }
 
