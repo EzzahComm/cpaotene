@@ -1,10 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // ─── cPanel / Passenger deployment ──────────────────────────────────────────
-  // Produces a self-contained .next/standalone folder that Passenger can run
-  // without needing node_modules installed on the server for every dependency.
-  output: "standalone",
+  // ─── Deployment Configuration ───────────────────────────────────────────────
+  // output: "standalone" for cPanel/Passenger (comment out for Vercel)
+  // Vercel uses default output for serverless functions
+  // For cPanel: uncomment the line below
+  // output: "standalone",
 
   // ─── Images ─────────────────────────────────────────────────────────────────
   images: {
@@ -33,7 +34,7 @@ const nextConfig: NextConfig = {
   // Disable x-powered-by header for security
   poweredByHeader: false,
 
-  // Compress responses (Passenger doesn't always do this)
+  // Compress responses
   compress: true,
 };
 
