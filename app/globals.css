@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 215 28% 17%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 28% 17%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 28% 17%;
+    --primary: 215 67% 23%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 215 28% 17%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 38 55% 55%;
+    --accent-foreground: 215 28% 17%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 215 67% 23%;
+    --radius: 0.5rem;
+
+    /* Brand tokens */
+    --navy: #0B1F3A;
+    --royal: #123D6B;
+    --gold: #C8A24D;
+    --charcoal: #1B1F24;
+    --light-gray: #F5F7FA;
+
+    --font-plus-jakarta: 'Plus Jakarta Sans', sans-serif;
+    --font-manrope: 'Manrope', sans-serif;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
+  }
+}
+
+@layer components {
+  /* Enterprise Section Spacing */
+  .section-padding {
+    @apply py-20 lg:py-28;
+  }
+
+  .container-enterprise {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Gold Underline */
+  .gold-underline {
+    @apply relative inline-block;
+  }
+  .gold-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-12 h-0.5 bg-gold-500;
+  }
+
+  /* Enterprise Card */
+  .card-enterprise {
+    @apply bg-white rounded-xl border border-gray-100 shadow-enterprise hover:shadow-enterprise-lg transition-all duration-300;
+  }
+
+  /* Premium Button */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-navy-900 text-white font-semibold rounded-lg hover:bg-royal-500 transition-all duration-200 shadow-enterprise hover:shadow-enterprise-md;
+  }
+
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-gold-500 text-navy-900 font-semibold rounded-lg hover:bg-gold-400 transition-all duration-200 shadow-enterprise;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-navy-900 text-navy-900 font-semibold rounded-lg hover:bg-navy-900 hover:text-white transition-all duration-200;
+  }
+
+  .btn-ghost-white {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-navy-900 transition-all duration-200;
+  }
+
+  /* Section Labels */
+  .label-enterprise {
+    @apply inline-flex items-center gap-2 text-gold-500 font-semibold text-sm uppercase tracking-widest;
+  }
+
+  /* Divider */
+  .divider-gold {
+    @apply w-12 h-1 bg-gold-500 rounded-full;
+  }
+
+  /* Navbar link */
+  .nav-link {
+    @apply text-sm font-medium text-charcoal-700 hover:text-navy-900 transition-colors duration-200 relative;
+  }
+
+  /* Service card hover */
+  .service-card {
+    @apply card-enterprise p-8 group cursor-pointer;
+  }
+
+  .service-card:hover {
+    @apply border-gold-300;
+  }
+
+  /* Hero gradient overlay */
+  .hero-overlay {
+    background: linear-gradient(135deg, rgba(11, 31, 58, 0.97) 0%, rgba(18, 61, 107, 0.92) 60%, rgba(11, 31, 58, 0.85) 100%);
+  }
+
+  /* Mesh background */
+  .mesh-bg {
+    background-image:
+      radial-gradient(ellipse at 20% 50%, rgba(18, 61, 107, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(200, 162, 77, 0.05) 0%, transparent 50%);
+  }
+
+  /* Gold accent line */
+  .accent-line {
+    @apply w-16 h-1 bg-gradient-to-r from-gold-400 to-gold-600 rounded-full;
+  }
+
+  /* Insight card */
+  .insight-card {
+    @apply card-enterprise overflow-hidden group cursor-pointer;
+  }
+
+  /* Number stat */
+  .stat-number {
+    @apply text-4xl lg:text-5xl font-bold font-heading text-navy-900;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F5F7FA;
+}
+::-webkit-scrollbar-thumb {
+  background: #123D6B;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0B1F3A;
+}
