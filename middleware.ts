@@ -17,6 +17,7 @@ export async function middleware(request: NextRequest) {
           return request.cookies.getAll();
         },
         setAll(cookiesToSet) {
+          // Write refreshed session cookies back to the response
           cookiesToSet.forEach(({ name, value, options }) =>
             response.cookies.set(name, value, options)
           );
@@ -25,33 +26,28 @@ export async function middleware(request: NextRequest) {
     }
   );
 
-  // Refresh session if needed
-  await supabase.auth.getSession();
-
-  // Protect specific routes
   const pathname = request.nextUrl.pathname;
 
-  // Routes that require authentication
-  const protectedRoutes = ["/client-portal", "/dashboard"];
-  
-  // Check if route is protected
-  if (protectedRoutes.some((route) => pathname.startsWith(route))) {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
+  // getUser() validates the JWT with the Supabase server on every call —
+  // unlike getSession() which only reads the local cookie and can be spoofed.
+  // One call covers both the refresh and the auth check.
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-    if (!session) {
-      return NextResponse.redirect(new URL("/auth/login", request.url));
+  // ── Protected routes: redirect unauthenticated users to login ─────────────
+  const protectedRoutes = ["/client-portal", "/dashboard"];
+  if (protectedRoutes.some((route) => pathname.startsWith(route))) {
+    if (!user) {
+      const loginUrl = new URL("/auth/login", request.url);
+      loginUrl.searchParams.set("next", pathname); // preserve intended destination
+      return NextResponse.redirect(loginUrl);
     }
   }
 
-  // Redirect authenticated users away from auth pages
+  // ── Auth pages: redirect already-authenticated users to portal ────────────
   if (pathname === "/auth/login" || pathname === "/auth/signup") {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-
-    if (session) {
+    if (user) {
       return NextResponse.redirect(new URL("/client-portal", request.url));
     }
   }

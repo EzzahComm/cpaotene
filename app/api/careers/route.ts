@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServiceClient } from "@/lib/supabase/server";
 import { Resend } from "resend";
+import { withRateLimit, RATE_LIMITS } from "@/lib/ratelimit";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
+  // Rate limit: 3 applications per hour per IP
+  const limited = await withRateLimit(request, RATE_LIMITS.careers);
+  if (limited) return limited;
+
   try {
     const formData = await request.formData();
 

@@ -6,7 +6,7 @@ export type ChatMessage = {
 };
 
 const OPENAI_URL = "https://api.openai.com/v1/chat/completions";
-const CLAUDE_URL = "https://api.anthropic.com/v1/complete";
+const CLAUDE_URL = "https://api.anthropic.com/v1/messages";
 
 const POLYCAP_SYSTEM_PROMPT = `You are Polycap. A. W., the virtual receptionist and onboarding assistant for CPA Otene & Associates LLP in Kenya. You help clients with audit, tax, governance, risk, internal audit, and management consultancy. You qualify leads, recommend the best service, and respond politely with professional, East Africa–friendly language.
 
@@ -85,28 +85,29 @@ async function fetchOpenAIResponse(messages: ChatMessage[]) {
 
 async function fetchClaudeResponse(messages: ChatMessage[]) {
   const apiKey = process.env.ANTHROPIC_API_KEY!;
-  const model = process.env.ANTHROPIC_MODEL || "claude-3.5-mini";
+  // Default: claude-haiku-4-5 (fast + affordable). Override with ANTHROPIC_MODEL env var.
+  const model = process.env.ANTHROPIC_MODEL || "claude-haiku-4-5-20251001";
 
-  const prompt = messages
-    .map((message) => {
-      if (message.role === "system") return `System: ${message.content}`;
-      if (message.role === "assistant") return `Assistant: ${message.content}`;
-      return `Human: ${message.content}`;
-    })
-    .join("\n\n") + "\n\nAssistant:";
+  // Separate system prompt from conversation messages (Messages API requirement)
+  const systemMessage = messages.find((m) => m.role === "system");
+  const conversationMessages = messages.filter((m) => m.role !== "system");
 
   const response = await fetch(CLAUDE_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${apiKey}`,
+      "x-api-key": apiKey,
+      "anthropic-version": "2023-06-01",
     },
     body: JSON.stringify({
       model,
-      prompt,
-      max_tokens_to_sample: 900,
+      max_tokens: 900,
       temperature: 0.2,
-      stop_sequences: ["\nHuman:", "\nAssistant:"]
+      ...(systemMessage && { system: systemMessage.content }),
+      messages: conversationMessages.map((m) => ({
+        role: m.role,
+        content: m.content,
+      })),
     }),
   });
 
@@ -116,7 +117,7 @@ async function fetchClaudeResponse(messages: ChatMessage[]) {
   }
 
   const payload = await response.json();
-  return payload?.completion || "";
+  return payload?.content?.[0]?.text || "";
 }
 
 export async function queryAgent(messages: ChatMessage[]) {

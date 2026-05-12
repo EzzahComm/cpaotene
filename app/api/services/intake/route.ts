@@ -3,8 +3,13 @@ import { createClient } from "@/lib/supabase/server";
 import { ServiceIntakeSchema } from "@/lib/schemas/serviceIntake";
 import { classifyOnboardingRequest } from "@/lib/ai";
 import { ZodError } from "zod";
+import { withRateLimit, RATE_LIMITS } from "@/lib/ratelimit";
 
 export async function POST(request: NextRequest) {
+  // Rate limit: 5 intake submissions per 10 minutes per IP
+  const limited = await withRateLimit(request, RATE_LIMITS.intake);
+  if (limited) return limited;
+
   try {
     const body = await request.json();
 

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createServiceClient } from "@/lib/supabase/server";
 import { Resend } from "resend";
 import { z } from "zod";
+import { withRateLimit, RATE_LIMITS } from "@/lib/ratelimit";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -11,6 +12,10 @@ const newsletterSchema = z.object({
 });
 
 export async function POST(request: NextRequest) {
+  // Rate limit: 3 subscriptions per hour per IP
+  const limited = await withRateLimit(request, RATE_LIMITS.newsletter);
+  if (limited) return limited;
+
   try {
     const body = await request.json();
     const parsed = newsletterSchema.safeParse(body);
