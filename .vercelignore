@@ -1,0 +1,47 @@
+# Development and build files
+.git
+.gitignore
+.next
+.env.local
+.env.*.local
+node_modules
+npm-debug.log
+yarn-error.log
+.DS_Store
+
+# Documentation
+*.md
+docs/
+
+# IDE and editor files
+.vscode
+.idea
+*.swp
+*.swo
+*.sublime-*
+
+# Test files
+__tests__
+test
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+.coverage
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.travis.yml
+
+# Scripts for other deployments
+scripts/cpanel-postbuild.js
+DEPLOYMENT-CPANEL.md
+
+# Temporary files
+tmp/
+.tmp
+*.tmp
+
+# Database
+supabase/

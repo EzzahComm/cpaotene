@@ -5,9 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:analyze": "ANALYZE=true next build",
     "start": "node server.js",
     "start:cpanel": "NODE_ENV=production node server.js",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "email": "email dev --dir emails",
     "postbuild": "node scripts/cpanel-postbuild.js"
   },
