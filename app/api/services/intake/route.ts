@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { ServiceIntakeSchema } from "@/lib/schemas/serviceIntake";
-import { classifyOnboardingRequest } from "@/lib/ai";
+import { classifyOnboardingRequest, type AssessmentResult } from "@/lib/ai";
 import { ZodError } from "zod";
 import { withRateLimit, RATE_LIMITS } from "@/lib/ratelimit";
 import { leadNurtureWorkflow } from "@/workflows/lead-nurture";
@@ -57,12 +57,12 @@ export async function POST(request: NextRequest) {
     const requestId = data?.[0]?.id;
 
     let leadScore: number | null = null;
-    let priority: "high" | "medium" | "low" | null = null;
+    let priority: AssessmentResult["priority"] | null = null;
 
     try {
       const assessment = await classifyOnboardingRequest(validatedData);
       leadScore = assessment.leadScore ?? null;
-      priority = (assessment.priority as typeof priority) ?? null;
+      priority = assessment.priority;
 
       if (requestId) {
         await supabase

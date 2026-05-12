@@ -31,6 +31,8 @@ const AssessmentOutputSchema = z.object({
   followUpMessage: z.string(),
 });
 
+export type AssessmentResult = z.infer<typeof AssessmentOutputSchema>;
+
 function extractJson(text: string) {
   const jsonMatch = text.match(/```json([\s\S]*?)```/i);
   const candidate = jsonMatch ? jsonMatch[1] : text;
@@ -128,7 +130,7 @@ export async function queryAgent(messages: ChatMessage[]) {
   return await fetchClaudeResponse(messages);
 }
 
-export async function classifyOnboardingRequest(formData: Record<string, unknown>) {
+export async function classifyOnboardingRequest(formData: Record<string, unknown>): Promise<AssessmentResult & { raw: string }> {
   const snippets = Object.entries(formData)
     .map(([key, value]) => `- ${key}: ${typeof value === "string" ? value : JSON.stringify(value)}`)
     .join("\n");

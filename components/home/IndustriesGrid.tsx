@@ -4,9 +4,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import {
-  Landmark, Car, Building2, Briefcase, Zap, HeartPulse,
-  Shield, FlaskConical, Tv, Heart, TrendingUp, Scale,
-  Home, ShoppingBag, Cpu, Radio, Plane, ArrowRight
+    Landmark, Building2, Zap, HeartPulse, Shield, Heart, Home, Cpu, TrendingUp, ShoppingBag, Radio, Plane, ArrowRight,
 } from "lucide-react";
 
 const industries = [

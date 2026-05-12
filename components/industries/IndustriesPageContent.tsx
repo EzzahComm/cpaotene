@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
-import { ArrowRight, Landmark, Shield, Building2, Heart, HeartPulse, Home, Zap, Cpu, TrendingUp, ShoppingBag, Radio, Plane, Car, FlaskConical, Tv, Briefcase } from "lucide-react";
+import { ArrowRight, Landmark, Shield, Building2, Heart, HeartPulse, Home, Zap, Cpu, TrendingUp, ShoppingBag, Car, Briefcase } from "lucide-react";
 
 const industries = [
   {

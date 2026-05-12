@@ -39,7 +39,7 @@ export default function LoginPage() {
   // Check if returning from email link
   useEffect(() => {
     const handleAuthCallback = async () => {
-      const { data, error } = await supabase.auth.getSession();
+      const { data } = await supabase.auth.getSession();
       if (data.session) {
         router.push("/client-portal");
       }

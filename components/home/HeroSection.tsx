@@ -2,9 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Play, ChevronDown } from "lucide-react";
-
-const heroWords = ["Compliance", "Numbers", "Reporting", "Borders"];
+import { ArrowRight, ChevronDown } from "lucide-react";
 
 export function HeroSection() {
   return (
