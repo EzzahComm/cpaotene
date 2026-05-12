@@ -4,6 +4,7 @@ import { ServiceIntakeSchema } from "@/lib/schemas/serviceIntake";
 import { classifyOnboardingRequest } from "@/lib/ai";
 import { ZodError } from "zod";
 import { withRateLimit, RATE_LIMITS } from "@/lib/ratelimit";
+import { leadNurtureWorkflow } from "@/workflows/lead-nurture";
 
 export async function POST(request: NextRequest) {
   // Rate limit: 5 intake submissions per 10 minutes per IP
@@ -55,8 +56,14 @@ export async function POST(request: NextRequest) {
 
     const requestId = data?.[0]?.id;
 
+    let leadScore: number | null = null;
+    let priority: "high" | "medium" | "low" | null = null;
+
     try {
       const assessment = await classifyOnboardingRequest(validatedData);
+      leadScore = assessment.leadScore ?? null;
+      priority = (assessment.priority as typeof priority) ?? null;
+
       if (requestId) {
         await supabase
           .from("onboarding_requests")
@@ -65,6 +72,22 @@ export async function POST(request: NextRequest) {
       }
     } catch (aiError) {
       console.error("AI assessment failed:", aiError);
+    }
+
+    // Trigger lead nurture workflow — durable, survives serverless restarts
+    if (requestId) {
+      leadNurtureWorkflow({
+        requestId,
+        email: validatedData.email,
+        firstName: validatedData.firstName,
+        lastName: validatedData.lastName,
+        organizationName: validatedData.organizationName,
+        serviceType: validatedData.serviceType,
+        leadScore,
+        priority,
+      }).catch((err) =>
+        console.error("[Lead Nurture Workflow] Failed to start:", err)
+      );
     }
 
     return NextResponse.json(
