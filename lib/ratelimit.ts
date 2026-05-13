@@ -57,15 +57,6 @@ export function getClientIp(request: NextRequest): string {
 
 // ── Upstash sliding-window rate limiter ──────────────────────────────────────
 
-let _ratelimiter: Map<string, ReturnType<typeof createSlidingWindow>> | null = null;
-
-function createSlidingWindow(config: RateLimitConfig) {
-  // We implement a lightweight sliding window using Upstash REST API directly
-  // so we don't need to bundle the full SDK at build time. The SDK is still
-  // the recommended approach — install @upstash/ratelimit + @upstash/redis.
-  return config;
-}
-
 /**
  * Check whether a given IP has exceeded the rate limit for a named policy.
  *

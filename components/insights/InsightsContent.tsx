@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
-import { Search, Clock, ArrowRight, Tag, Download } from "lucide-react";
+import { Search, Clock, ArrowRight, Download } from "lucide-react";
 
 const categories = ["All", "ESG", "Tax", "IFRS", "Governance", "Risk", "Audit", "Public Sector", "Technology"];
 

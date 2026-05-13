@@ -17,14 +17,14 @@ const FormField = ({
   name: string
   render: (props: any) => React.ReactNode
 }) => {
+  void control
   const [value, setValue] = React.useState("")
-  const [error, setError] = React.useState("")
 
   return (
     <div>
       {render({
         field: { value, onChange: setValue, name },
-        fieldState: { error: error ? { message: error } : undefined },
+        fieldState: { error: undefined },
       })}
     </div>
   )

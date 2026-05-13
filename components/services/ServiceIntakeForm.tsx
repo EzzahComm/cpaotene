@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import {
   Form,
   FormControl,
@@ -278,7 +277,7 @@ export function ServiceIntakeForm({
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {Object.entries(ORG_SIZES).map(([key, value]) => (
+                      {Object.entries(ORG_SIZES).map(([, value]) => (
                         <SelectItem key={value} value={value}>
                           {value} employees
                         </SelectItem>

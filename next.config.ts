@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   // output: "standalone" for cPanel/Passenger (comment out for Vercel)
   // Vercel uses default output for serverless functions
   // For cPanel: uncomment the line below
-  // output: "standalone",
+  output: "standalone",
 
   // ─── Images ─────────────────────────────────────────────────────────────────
   images: {
@@ -49,8 +49,6 @@ const nextConfig: NextConfig = {
     ],
     // Faster builds with parallel route compilation
     parallelServerBuildTraces: true,
-    // Optimize server builds
-    optimizeServerJs: true,
   },
 
   // Disable x-powered-by header for security
@@ -60,7 +58,6 @@ const nextConfig: NextConfig = {
   compress: true,
 
   // ─── Build Optimization ─────────────────────────────────────────────────────
-  swcMinify: true,
   productionBrowserSourceMaps: false,
 
   // ─── Headers & Security ─────────────────────────────────────────────────────

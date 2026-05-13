@@ -146,7 +146,7 @@ export async function classifyOnboardingRequest(formData: Record<string, unknown
   if (!parsed) {
     return {
       raw: answer,
-      leadScore: null,
+      leadScore: 1,
       priority: "medium",
       qualification: "needs_follow_up",
       recommendedServices: [],
@@ -159,7 +159,7 @@ export async function classifyOnboardingRequest(formData: Record<string, unknown
   if (!result.success) {
     return {
       raw: answer,
-      leadScore: null,
+      leadScore: 1,
       priority: "medium",
       qualification: "needs_follow_up",
       recommendedServices: Array.isArray(parsed?.recommendedServices) ? parsed.recommendedServices : [],

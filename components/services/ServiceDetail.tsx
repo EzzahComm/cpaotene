@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
-import { CheckCircle2, ArrowRight, Building2 } from "lucide-react";
+import { CheckCircle2, ArrowRight } from "lucide-react";
 
 interface ServiceDetailProps {
   service: {

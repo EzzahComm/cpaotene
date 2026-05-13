@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import {
   MapPin, Phone, Mail, Linkedin, Twitter, Facebook,
   ArrowRight, Shield, ChevronRight
