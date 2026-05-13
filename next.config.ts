@@ -1,3 +1,4 @@
+import path from "path";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -6,6 +7,7 @@ const nextConfig: NextConfig = {
   // Vercel uses default output for serverless functions
   // For cPanel: uncomment the line below
   output: "standalone",
+  outputFileTracingRoot: path.resolve(__dirname),
 
   // ─── Images ─────────────────────────────────────────────────────────────────
   images: {
