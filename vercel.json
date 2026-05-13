@@ -4,10 +4,10 @@
   "installCommand": "npm install --prefer-offline --no-audit",
   "framework": "nextjs",
   "env": {
-    "NEXT_PUBLIC_SUPABASE_URL": "@next_public_supabase_url",
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@next_public_supabase_anon_key",
-    "SUPABASE_SERVICE_ROLE_KEY": "@supabase_service_role_key",
-    "RESEND_API_KEY": "@resend_api_key"
+    "NEXT_PUBLIC_SUPABASE_URL": "https://xdjmeteugjxoitknmzhz.supabase.co",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhkam1ldGV1Z2p4b2l0a25temh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MTU2NzUsImV4cCI6MjA5NDA5MTY3NX0.QbbTVI-eDnPr1exH0i5B5PHIlNJfF7K0DQW-QrODZdg",
+    "SUPABASE_SERVICE_ROLE_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhkam1ldGV1Z2p4b2l0a25temh6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODUxNTY3NSwiZXhwIjoyMDk0MDkxNjc1fQ.atnpB0Jp4Zxswcs5tIZhQMA3dYjZyAO-A3ypQwbJAcU",
+    "RESEND_API_KEY": "re_L7zZvhZi_CWbwxWKodAh51cR9qviRSSGk"
   },
   "build": {
     "env": {
