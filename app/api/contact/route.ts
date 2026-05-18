@@ -4,6 +4,8 @@ import { Resend } from "resend";
 import { z } from "zod";
 import { withRateLimit, RATE_LIMITS } from "@/lib/ratelimit";
 
+export const maxDuration = 30;
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const contactSchema = z.object({

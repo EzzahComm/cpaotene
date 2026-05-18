@@ -3,6 +3,8 @@ import { z } from "zod";
 import { queryAgent } from "@/lib/ai";
 import { withRateLimit, RATE_LIMITS } from "@/lib/ratelimit";
 
+export const maxDuration = 30;
+
 const chatSchema = z.object({
   messages: z.array(
     z.object({

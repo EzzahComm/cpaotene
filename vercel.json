@@ -16,14 +16,8 @@
   },
   "git": {
     "deploymentEnabled": {
-      "main": true
+      "master": true
     }
   },
-  "regions": ["sfo1"],
-  "functions": {
-    "api/**": {
-      "maxDuration": 30,
-      "memory": 1024
-    }
-  }
+  "regions": ["sfo1"]
 }
