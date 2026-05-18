@@ -43,5 +43,5 @@ tmp/
 .tmp
 *.tmp
 
-# Database
-supabase/
+# Database — only ignore root-level supabase/ (migrations), NOT lib/supabase/
+/supabase/
