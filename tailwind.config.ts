@@ -121,7 +121,7 @@ const config: Config = {
       backgroundImage: {
         "gradient-navy": "linear-gradient(135deg, #081840 0%, #2B5FC9 100%)",
         "gradient-gold": "linear-gradient(135deg, #C8A24D 0%, #E8C35F 100%)",
-        "gradient-hero": "linear-gradient(135deg, #1A3A8A 0%, #2B5FC9 60%, #1A3A8A 100%)",
+        "gradient-hero": "linear-gradient(135deg, #0369a1 0%, #0ea5e9 55%, #38bdf8 100%)",
         "gradient-mesh": "radial-gradient(ellipse at top left, #1A3A8A22 0%, transparent 50%), radial-gradient(ellipse at bottom right, #C8A24D11 0%, transparent 50%)",
       },
       boxShadow: {
