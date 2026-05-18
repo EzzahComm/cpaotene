@@ -86,7 +86,7 @@ export function Header() {
 
   const isHomepage = pathname === "/";
   const headerBase = isScrolled || !isHomepage
-    ? "bg-white/98 backdrop-blur-sm shadow-enterprise border-b border-gray-100"
+    ? "bg-orange-500 backdrop-blur-sm shadow-enterprise border-b border-orange-600"
     : "bg-transparent";
 
   return (
@@ -94,12 +94,12 @@ export function Header() {
       {/* Top bar */}
       <div className={cn(
         "hidden lg:block border-b transition-all duration-300",
-        isScrolled || !isHomepage ? "border-gray-100 bg-navy-50" : "border-white/10 bg-navy-600/50"
+        isScrolled || !isHomepage ? "border-orange-600 bg-orange-600" : "border-white/10 bg-navy-600/50"
       )}>
         <div className="container-enterprise flex justify-between items-center py-2">
           <div className={cn(
             "flex items-center gap-6 text-xs",
-            isScrolled || !isHomepage ? "text-charcoal-600" : "text-white/80"
+            isScrolled || !isHomepage ? "text-white/90" : "text-white/80"
           )}>
             <a href="tel:+254747515972" className="flex items-center gap-1.5 hover:text-gold-500 transition-colors">
               <Phone size={11} />
@@ -111,10 +111,10 @@ export function Header() {
           </div>
           <div className={cn(
             "flex items-center gap-4 text-xs font-medium",
-            isScrolled || !isHomepage ? "text-charcoal-600" : "text-white/80"
+            isScrolled || !isHomepage ? "text-white/90" : "text-white/80"
           )}>
             <Link href="/client-portal" className="hover:text-gold-500 transition-colors">Client Portal</Link>
-            <span className={isScrolled || !isHomepage ? "text-gray-300" : "text-white/30"}>|</span>
+            <span className={isScrolled || !isHomepage ? "text-white/30" : "text-white/30"}>|</span>
             <Link href="/careers" className="hover:text-gold-500 transition-colors">Careers</Link>
           </div>
         </div>
@@ -133,9 +133,7 @@ export function Header() {
             <Link href="/" className="flex items-center flex-shrink-0 group" aria-label="CPA OTENE & ASSOCIATES LLP — Home">
               <div className={cn(
                 "transition-all duration-300 rounded-xl px-3 py-1.5",
-                isScrolled || !isHomepage
-                  ? "bg-transparent"
-                  : "bg-white/95 shadow-enterprise-md"
+                "bg-white/95 shadow-enterprise-md"
               )}>
                 <Image
                   src="/logo.png"
@@ -165,7 +163,7 @@ export function Header() {
                 <button type="button" className={cn(
                   "flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200",
                   isScrolled || !isHomepage
-                    ? "text-charcoal-700 hover:text-navy-900 hover:bg-gray-50"
+                    ? "text-white hover:text-white hover:bg-white/15"
                     : "text-white/90 hover:text-white hover:bg-white/10"
                 )}>
                   Services
@@ -240,7 +238,7 @@ export function Header() {
                 <button type="button" className={cn(
                   "flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200",
                   isScrolled || !isHomepage
-                    ? "text-charcoal-700 hover:text-navy-900 hover:bg-gray-50"
+                    ? "text-white hover:text-white hover:bg-white/15"
                     : "text-white/90 hover:text-white hover:bg-white/10"
                 )}>
                   Industries
@@ -301,7 +299,7 @@ export function Header() {
                 className={cn(
                   "p-2 rounded-lg transition-all duration-200",
                   isScrolled || !isHomepage
-                    ? "text-charcoal-600 hover:text-navy-900 hover:bg-gray-100"
+                    ? "text-white/90 hover:text-white hover:bg-white/15"
                     : "text-white/80 hover:text-white hover:bg-white/10"
                 )}
                 aria-label="Search"
@@ -323,7 +321,7 @@ export function Header() {
               className={cn(
                 "xl:hidden p-2 rounded-lg transition-all",
                 isScrolled || !isHomepage
-                  ? "text-navy-900 hover:bg-gray-100"
+                  ? "text-white hover:bg-white/15"
                   : "text-white hover:bg-white/10"
               )}
               aria-label="Toggle menu"
@@ -340,7 +338,7 @@ export function Header() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="xl:hidden bg-white border-t border-gray-100 overflow-y-auto max-h-[85vh]"
+              className="xl:hidden bg-orange-500 border-t border-orange-600 overflow-y-auto max-h-[85vh]"
             >
               <div className="container-enterprise py-6 space-y-1">
                 <MobileNavLink href="/" label="Home" />
@@ -354,11 +352,11 @@ export function Header() {
                 <MobileNavLink href="/careers" label="Careers" />
                 <MobileNavLink href="/contact" label="Contact Us" />
 
-                <div className="pt-4 border-t border-gray-100 space-y-3">
+                <div className="pt-4 border-t border-white/20 space-y-3">
                   <Link href="/contact" className="btn-primary w-full justify-center">
                     Talk to an Advisor
                   </Link>
-                  <a href="tel:+254747515972" className="flex items-center justify-center gap-2 text-sm text-charcoal-600">
+                  <a href="tel:+254747515972" className="flex items-center justify-center gap-2 text-sm text-white/80">
                     <Phone size={14} /> +254 747 515 972
                   </a>
                 </div>
@@ -447,8 +445,8 @@ function NavLink({
         "px-3 py-2 rounded-md text-sm font-medium transition-all duration-200",
         isScrolled || !isHomepage
           ? isActive
-            ? "text-navy-900 bg-navy-50 font-semibold"
-            : "text-charcoal-700 hover:text-navy-900 hover:bg-gray-50"
+            ? "text-white bg-white/20 font-semibold"
+            : "text-white hover:text-white hover:bg-white/15"
           : isActive
             ? "text-white bg-white/15 font-semibold"
             : "text-white/90 hover:text-white hover:bg-white/10"
@@ -463,7 +461,7 @@ function MobileNavLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
-      className="block px-4 py-3 rounded-xl text-sm font-medium text-charcoal-700 hover:bg-navy-50 hover:text-navy-900 transition-colors"
+      className="block px-4 py-3 rounded-xl text-sm font-medium text-white hover:bg-white/15 hover:text-white transition-colors"
     >
       {label}
     </Link>
@@ -484,7 +482,7 @@ function MobileSection({
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium text-charcoal-700 hover:bg-navy-50 transition-colors"
+        className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium text-white hover:bg-white/15 transition-colors"
       >
         {label}
         <ChevronDown
@@ -505,7 +503,7 @@ function MobileSection({
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="block px-4 py-2 rounded-lg text-xs text-charcoal-600 hover:bg-navy-50 hover:text-navy-900 transition-colors"
+                  className="block px-4 py-2 rounded-lg text-xs text-white/80 hover:bg-white/15 hover:text-white transition-colors"
                 >
                   {item.name}
                 </Link>
