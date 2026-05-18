@@ -36,6 +36,12 @@ function copyDir(src, dest) {
   }
 }
 
+// Skip cPanel-specific steps on Vercel — it manages its own output
+if (process.env.VERCEL) {
+  console.log("Vercel detected — skipping cPanel post-build.");
+  process.exit(0);
+}
+
 console.log("\n📦 cPanel Post-Build: Preparing standalone folder...\n");
 
 if (!fs.existsSync(STANDALONE)) {
