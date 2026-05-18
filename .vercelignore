@@ -34,8 +34,7 @@ test
 .gitlab-ci.yml
 .travis.yml
 
-# Scripts for other deployments
-scripts/cpanel-postbuild.js
+# Docs for other deployments
 DEPLOYMENT-CPANEL.md
 
 # Temporary files
