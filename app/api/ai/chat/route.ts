@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { queryAgent } from "@/lib/ai";
-import { createClient } from "@/lib/supabase/server";
 import { withRateLimit, RATE_LIMITS } from "@/lib/ratelimit";
 
 const chatSchema = z.object({
@@ -14,18 +13,11 @@ const chatSchema = z.object({
 });
 
 export async function POST(request: NextRequest) {
-  // Rate limit: 30 messages per minute per IP (auth check follows below)
+  // Rate limit: 30 messages per minute per IP
   const limited = await withRateLimit(request, RATE_LIMITS.aiChat);
   if (limited) return limited;
 
   try {
-    // Require an authenticated session — Polycap widget is client-portal only
-    const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
     const body = await request.json();
     const parsed = chatSchema.safeParse(body);
 
