@@ -45,3 +45,7 @@ tmp/
 
 # Database — only ignore root-level supabase/ (migrations), NOT lib/supabase/
 /supabase/
+
+# Local DB tooling — not needed on Vercel
+prisma.config.ts
+prisma/
