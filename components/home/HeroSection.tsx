@@ -146,7 +146,7 @@ export function HeroSection() {
         <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 space-y-6 w-52">
           {[
             { value: "25+", label: "Years of Excellence" },
-            { value: "500+", label: "Enterprise Clients" },
+            { value: "20+", label: "Enterprise Clients" },
             { value: "15+", label: "Industries Served" },
             { value: "4", label: "Kenyan Cities" },
           ].map((stat) => (

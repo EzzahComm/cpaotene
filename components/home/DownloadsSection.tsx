@@ -55,7 +55,7 @@ export function DownloadsSection() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="section-padding bg-white" ref={ref}>
+    <section id="downloads" className="section-padding bg-white" ref={ref}>
       <div className="container-enterprise">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">

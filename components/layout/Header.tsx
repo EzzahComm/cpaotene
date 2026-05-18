@@ -140,9 +140,9 @@ export function Header() {
                 <Image
                   src="/logo.png"
                   alt="CPA OTENE & ASSOCIATES LLP"
-                  width={160}
-                  height={44}
-                  className="h-10 w-auto object-contain"
+                  width={246}
+                  height={69}
+                  className="h-11 w-auto object-contain"
                   priority
                 />
               </div>
@@ -218,7 +218,7 @@ export function Header() {
                         </div>
                       </div>
                       <div className="bg-navy-50 px-6 py-4 flex items-center justify-between">
-                        <p className="text-xs text-charcoal-500">Trusted by 500+ enterprises across East Africa</p>
+                        <p className="text-xs text-charcoal-500">Trusted by 20+ enterprises across East Africa</p>
                         <Link
                           href="/contact"
                           className="text-xs font-semibold text-navy-900 hover:text-gold-500 flex items-center gap-1 transition-colors"
@@ -289,6 +289,7 @@ export function Header() {
               </div>
 
               <NavLink href="/insights" label="Insights" isScrolled={isScrolled} isHomepage={isHomepage} />
+              <NavLink href="/#downloads" label="Downloads" isScrolled={isScrolled} isHomepage={isHomepage} />
               <NavLink href="/careers" label="Careers" isScrolled={isScrolled} isHomepage={isHomepage} />
             </nav>
 
@@ -349,6 +350,7 @@ export function Header() {
                 <MobileSection label="Industries" items={industries} />
 
                 <MobileNavLink href="/insights" label="Insights" />
+                <MobileNavLink href="/#downloads" label="Downloads" />
                 <MobileNavLink href="/careers" label="Careers" />
                 <MobileNavLink href="/contact" label="Contact Us" />
 
@@ -436,7 +438,7 @@ function NavLink({
   isHomepage: boolean;
 }) {
   const pathname = usePathname();
-  const isActive = pathname === href || (href !== "/" && pathname.startsWith(href));
+  const isActive = !href.includes("#") && (pathname === href || (href !== "/" && pathname.startsWith(href)));
 
   return (
     <Link

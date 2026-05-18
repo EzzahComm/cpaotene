@@ -12,7 +12,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "CPA OTENE & ASSOCIATES LLP | Audit, Tax & Risk Advisory Services Kenya",
   description:
-    "CPA OTENE & ASSOCIATES LLP is a professional accounting, audit, tax, risk advisory, and management consultancy firm based in Nairobi, Kenya. Trusted by 500+ enterprises, NGOs, and public institutions across East Africa.",
+    "CPA OTENE & ASSOCIATES LLP is a professional accounting, audit, tax, risk advisory, and management consultancy firm based in Nairobi, Kenya. Trusted by 20+ enterprises, NGOs, and public institutions across East Africa.",
 };
 
 export default function HomePage() {
