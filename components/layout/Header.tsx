@@ -84,49 +84,30 @@ export function Header() {
     menuTimeout.current = setTimeout(() => setActiveMenu(null), 150);
   };
 
-  const isHomepage = pathname === "/";
-  const headerBase = isScrolled || !isHomepage
-    ? "bg-orange-500 backdrop-blur-sm shadow-enterprise border-b border-orange-600"
-    : "bg-transparent";
-
   return (
     <>
       {/* Top bar */}
-      <div className={cn(
-        "hidden lg:block border-b transition-all duration-300",
-        isScrolled || !isHomepage ? "border-orange-600 bg-orange-600" : "border-white/10 bg-navy-600/50"
-      )}>
+      <div className="hidden lg:block border-b border-orange-600 bg-orange-600 transition-all duration-300">
         <div className="container-enterprise flex justify-between items-center py-2">
-          <div className={cn(
-            "flex items-center gap-6 text-xs",
-            isScrolled || !isHomepage ? "text-white/90" : "text-white/80"
-          )}>
-            <a href="tel:+254747515972" className="flex items-center gap-1.5 hover:text-gold-500 transition-colors">
+          <div className="flex items-center gap-6 text-xs text-white/90">
+            <a href="tel:+254747515972" className="flex items-center gap-1.5 hover:text-white transition-colors">
               <Phone size={11} />
               +254 747 515 972
             </a>
-            <a href="mailto:info@cpaotene.com" className="hover:text-gold-500 transition-colors">
+            <a href="mailto:info@cpaotene.com" className="hover:text-white transition-colors">
               info@cpaotene.com
             </a>
           </div>
-          <div className={cn(
-            "flex items-center gap-4 text-xs font-medium",
-            isScrolled || !isHomepage ? "text-white/90" : "text-white/80"
-          )}>
-            <Link href="/client-portal" className="hover:text-gold-500 transition-colors">Client Portal</Link>
-            <span className={isScrolled || !isHomepage ? "text-white/30" : "text-white/30"}>|</span>
-            <Link href="/careers" className="hover:text-gold-500 transition-colors">Careers</Link>
+          <div className="flex items-center gap-4 text-xs font-medium text-white/90">
+            <Link href="/client-portal" className="hover:text-white transition-colors">Client Portal</Link>
+            <span className="text-white/30">|</span>
+            <Link href="/careers" className="hover:text-white transition-colors">Careers</Link>
           </div>
         </div>
       </div>
 
       {/* Main Nav */}
-      <header
-        className={cn(
-          "sticky top-0 z-50 transition-all duration-300",
-          headerBase
-        )}
-      >
+      <header className="sticky top-0 z-50 bg-orange-500 border-b border-orange-600 shadow-enterprise transition-all duration-300">
         <div className="container-enterprise">
           <div className="flex items-center justify-between h-18 py-4">
             {/* Logo */}
@@ -149,10 +130,10 @@ export function Header() {
             {/* Desktop Nav */}
             <nav className="hidden xl:flex items-center gap-1">
               {/* Home */}
-              <NavLink href="/" label="Home" isScrolled={isScrolled} isHomepage={isHomepage} />
+              <NavLink href="/" label="Home" />
 
               {/* About */}
-              <NavLink href="/about" label="About Us" isScrolled={isScrolled} isHomepage={isHomepage} />
+              <NavLink href="/about" label="About Us" />
 
               {/* Services Mega Menu */}
               <div
@@ -162,9 +143,7 @@ export function Header() {
               >
                 <button type="button" className={cn(
                   "flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200",
-                  isScrolled || !isHomepage
-                    ? "text-white hover:text-white hover:bg-white/15"
-                    : "text-white/90 hover:text-white hover:bg-white/10"
+                  "text-white hover:text-white hover:bg-white/15"
                 )}>
                   Services
                   <ChevronDown size={14} className={cn(
@@ -237,9 +216,7 @@ export function Header() {
               >
                 <button type="button" className={cn(
                   "flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200",
-                  isScrolled || !isHomepage
-                    ? "text-white hover:text-white hover:bg-white/15"
-                    : "text-white/90 hover:text-white hover:bg-white/10"
+                  "text-white hover:text-white hover:bg-white/15"
                 )}>
                   Industries
                   <ChevronDown size={14} className={cn(
@@ -286,9 +263,9 @@ export function Header() {
                 </AnimatePresence>
               </div>
 
-              <NavLink href="/insights" label="Insights" isScrolled={isScrolled} isHomepage={isHomepage} />
-              <NavLink href="/#downloads" label="Downloads" isScrolled={isScrolled} isHomepage={isHomepage} />
-              <NavLink href="/careers" label="Careers" isScrolled={isScrolled} isHomepage={isHomepage} />
+              <NavLink href="/insights" label="Insights" />
+              <NavLink href="/#downloads" label="Downloads" />
+              <NavLink href="/careers" label="Careers" />
             </nav>
 
             {/* Right CTAs */}
@@ -298,9 +275,7 @@ export function Header() {
                 onClick={() => setSearchOpen(true)}
                 className={cn(
                   "p-2 rounded-lg transition-all duration-200",
-                  isScrolled || !isHomepage
-                    ? "text-white/90 hover:text-white hover:bg-white/15"
-                    : "text-white/80 hover:text-white hover:bg-white/10"
+                  "text-white/90 hover:text-white hover:bg-white/15"
                 )}
                 aria-label="Search"
               >
@@ -320,9 +295,7 @@ export function Header() {
               onClick={() => setMobileOpen(!mobileOpen)}
               className={cn(
                 "xl:hidden p-2 rounded-lg transition-all",
-                isScrolled || !isHomepage
-                  ? "text-white hover:bg-white/15"
-                  : "text-white hover:bg-white/10"
+                "text-white hover:bg-white/15"
               )}
               aria-label="Toggle menu"
             >
@@ -424,17 +397,7 @@ export function Header() {
   );
 }
 
-function NavLink({
-  href,
-  label,
-  isScrolled,
-  isHomepage,
-}: {
-  href: string;
-  label: string;
-  isScrolled: boolean;
-  isHomepage: boolean;
-}) {
+function NavLink({ href, label }: { href: string; label: string }) {
   const pathname = usePathname();
   const isActive = !href.includes("#") && (pathname === href || (href !== "/" && pathname.startsWith(href)));
 
@@ -443,13 +406,9 @@ function NavLink({
       href={href}
       className={cn(
         "px-3 py-2 rounded-md text-sm font-medium transition-all duration-200",
-        isScrolled || !isHomepage
-          ? isActive
-            ? "text-white bg-white/20 font-semibold"
-            : "text-white hover:text-white hover:bg-white/15"
-          : isActive
-            ? "text-white bg-white/15 font-semibold"
-            : "text-white/90 hover:text-white hover:bg-white/10"
+        isActive
+          ? "text-white bg-white/20 font-semibold"
+          : "text-white/90 hover:text-white hover:bg-white/15"
       )}
     >
       {label}
