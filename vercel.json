@@ -4,9 +4,9 @@
   "installCommand": "npm install --prefer-offline --no-audit",
   "framework": "nextjs",
   "env": {
-    "NEXT_PUBLIC_SUPABASE_URL": "https://xdjmeteugjxoitknmzhz.supabase.co",
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhkam1ldGV1Z2p4b2l0a25temh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MTU2NzUsImV4cCI6MjA5NDA5MTY3NX0.QbbTVI-eDnPr1exH0i5B5PHIlNJfF7K0DQW-QrODZdg",
-    "SUPABASE_SERVICE_ROLE_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhkam1ldGV1Z2p4b2l0a25temh6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODUxNTY3NSwiZXhwIjoyMDk0MDkxNjc1fQ.atnpB0Jp4Zxswcs5tIZhQMA3dYjZyAO-A3ypQwbJAcU",
+    "NEXT_PUBLIC_SUPABASE_URL": "https://skwgfymxyjtlxmauyidn.supabase.co",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNrd2dmeW14eWp0bHhtYXV5aWRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2OTA4MTYsImV4cCI6MjA5NDI2NjgxNn0.OTPnQAZ2kGDeL3uqNk6R2OjK-BuMC_rNU8wpK4viMD4",
+    "SUPABASE_SERVICE_ROLE_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNrd2dmeW14eWp0bHhtYXV5aWRuIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODY5MDgxNiwiZXhwIjoyMDk0MjY2ODE2fQ.DdrxJFPPZYIcsO8-y810oi3Z-zeVJTV2VWXLzzLYLGM",
     "RESEND_API_KEY": "re_L7zZvhZi_CWbwxWKodAh51cR9qviRSSGk"
   },
   "build": {
