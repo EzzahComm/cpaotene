@@ -64,7 +64,7 @@ export function WhyChooseUs() {
                   "We don't just audit your books. We build confidence in your future."
                 </h3>
                 <p className="text-white/65 text-sm leading-relaxed mb-8">
-                  Every engagement at CPA Otene and Associates LLP is anchored in
+                  Every engagement at CPA OTENE & ASSOCIATES LLP is anchored in
                   professional integrity, technical excellence, and a genuine
                   commitment to your institutional success.
                 </p>

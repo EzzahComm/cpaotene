@@ -92,7 +92,7 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.25 }}
             className="text-lg md:text-xl text-white/65 leading-relaxed mb-10 max-w-2xl"
           >
-            CPA Otene and Associates LLP delivers trusted audit, governance, tax, and
+            CPA OTENE & ASSOCIATES LLP delivers trusted audit, governance, tax, and
             advisory solutions for institutions shaping the future of Africa. We build
             confidence in your numbers — and your future.
           </motion.p>

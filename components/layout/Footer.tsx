@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
   MapPin, Phone, Mail, Linkedin, Twitter, Facebook,
-  ArrowRight, Shield, ChevronRight
+  Instagram, Youtube, ArrowRight, Shield, ChevronRight
 } from "lucide-react";
 
 const services = [
@@ -29,7 +30,7 @@ const company = [
 ];
 
 const offices = [
-  { city: "Nairobi", address: "Upper Hill, Nairobi, Kenya" },
+  { city: "Nairobi (HQ)", address: "Ngong Road, Oldonyo Villas, Suite No. 1, Nairobi" },
   { city: "Nakuru", address: "Nakuru CBD, Nakuru, Kenya" },
   { city: "Kisumu", address: "Kisumu CBD, Kisumu, Kenya" },
   { city: "Bungoma", address: "Bungoma CBD, Bungoma, Kenya" },
@@ -47,20 +48,14 @@ export function Footer() {
                 Ready to elevate your governance?
               </h3>
               <p className="text-white/70 text-sm">
-                Connect with our advisors and discover how we can support your organisation's growth.
+                Connect with our advisors and discover how we can support your organisation&apos;s growth.
               </p>
             </div>
             <div className="flex gap-3 flex-shrink-0">
-              <Link
-                href="/contact"
-                className="btn-gold text-sm py-3 px-6"
-              >
+              <Link href="/contact" className="btn-gold text-sm py-3 px-6">
                 Book a Consultation
               </Link>
-              <Link
-                href="/services"
-                className="btn-ghost-white text-sm py-3 px-6"
-              >
+              <Link href="/services" className="btn-ghost-white text-sm py-3 px-6">
                 Explore Services
               </Link>
             </div>
@@ -73,24 +68,26 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-br from-royal-500 to-navy-700 rounded-lg flex items-center justify-center border border-white/10">
-                <span className="text-gold-400 font-bold text-sm font-heading">CPA</span>
-              </div>
-              <div>
-                <div className="font-bold text-sm text-white font-heading">CPA OTENE</div>
-                <div className="text-xs text-white/50">& Associates LLP</div>
+            <Link href="/" className="inline-block mb-6">
+              <div className="bg-white rounded-xl px-4 py-2 inline-block">
+                <Image
+                  src="/logo.png"
+                  alt="CPA OTENE & ASSOCIATES LLP"
+                  width={160}
+                  height={44}
+                  className="h-10 w-auto object-contain"
+                />
               </div>
             </Link>
 
             <p className="text-white/60 text-sm leading-relaxed mb-6 max-w-xs">
-              Kenya's trusted audit, governance, tax, risk, and advisory firm.
+              Kenya&apos;s trusted audit, governance, tax, risk, and advisory firm.
               Delivering excellence across East Africa with international standards
               and local expertise.
             </p>
 
             {/* Certifications */}
-            <div className="flex items-center gap-2 mb-6">
+            <div className="flex flex-wrap items-center gap-2 mb-6">
               <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
                 <Shield size={14} className="text-gold-400" />
                 <span className="text-xs text-white/70 font-medium">ICPAK Registered</span>
@@ -102,11 +99,13 @@ export function Footer() {
             </div>
 
             {/* Social */}
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3">
               {[
-                { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-                { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
-                { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
+                { icon: Linkedin, href: "https://www.linkedin.com/company/cpa-otene-associates", label: "LinkedIn" },
+                { icon: Twitter, href: "https://x.com/CPAOTENE_LLP", label: "Twitter / X" },
+                { icon: Facebook, href: "https://facebook.com/CPAOTENE_LLP", label: "Facebook" },
+                { icon: Instagram, href: "https://www.instagram.com/cpaotene_llp/", label: "Instagram" },
+                { icon: Youtube, href: "https://www.youtube.com/@CPAOTENEASSOCIATESLLP", label: "YouTube" },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
@@ -173,13 +172,13 @@ export function Footer() {
               ))}
             </ul>
             <div className="space-y-2.5">
-              <a href="tel:+254700000000" className="flex items-center gap-2 text-xs text-white/55 hover:text-white transition-colors">
+              <a href="tel:+254747515972" className="flex items-center gap-2 text-xs text-white/55 hover:text-white transition-colors">
                 <Phone size={12} className="text-gold-400" />
-                +254 700 000 000
+                +254 747 515 972
               </a>
-              <a href="mailto:info@cpaotene.co.ke" className="flex items-center gap-2 text-xs text-white/55 hover:text-white transition-colors">
+              <a href="mailto:info@cpaotene.com" className="flex items-center gap-2 text-xs text-white/55 hover:text-white transition-colors">
                 <Mail size={12} className="text-gold-400" />
-                info@cpaotene.co.ke
+                info@cpaotene.com
               </a>
             </div>
           </div>
@@ -200,7 +199,7 @@ export function Footer() {
                 placeholder="Enter your email"
                 className="flex-1 md:w-60 bg-white/5 border border-white/10 text-white placeholder:text-white/30 text-sm rounded-lg px-4 py-2.5 outline-none focus:border-gold-400/50 transition-colors"
               />
-              <button type="submit" className="btn-gold text-sm py-2.5 px-4 flex-shrink-0">
+              <button type="submit" aria-label="Subscribe" className="btn-gold text-sm py-2.5 px-4 flex-shrink-0">
                 <ArrowRight size={15} />
               </button>
             </form>
@@ -212,9 +211,9 @@ export function Footer() {
       <div className="border-t border-white/5">
         <div className="container-enterprise py-5 flex flex-col md:flex-row items-center justify-between gap-3">
           <p className="text-xs text-white/35">
-            © {new Date().getFullYear()} CPA Otene and Associates LLP. All rights reserved.
+            © {new Date().getFullYear()} CPA OTENE & ASSOCIATES LLP. All Rights Reserved.
           </p>
-          <div className="flex items-center gap-5">
+          <div className="flex flex-wrap items-center gap-5">
             {[
               { label: "Privacy Policy", href: "/privacy" },
               { label: "Terms of Service", href: "/terms" },

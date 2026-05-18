@@ -1,6 +1,7 @@
 import { HeroSection } from "@/components/home/HeroSection";
 import { StatsSection } from "@/components/home/StatsSection";
 import { ServicesOverview } from "@/components/home/ServicesOverview";
+import { DownloadsSection } from "@/components/home/DownloadsSection";
 import { WhyChooseUs } from "@/components/home/WhyChooseUs";
 import { IndustriesGrid } from "@/components/home/IndustriesGrid";
 import { InsightsPreview } from "@/components/home/InsightsPreview";
@@ -9,9 +10,9 @@ import { CTASection } from "@/components/home/CTASection";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "CPA Otene & Associates LLP | Audit, Governance & Advisory Kenya",
+  title: "CPA OTENE & ASSOCIATES LLP | Audit, Tax & Risk Advisory Services Kenya",
   description:
-    "Kenya's premier audit, governance, tax, risk, and advisory firm. Trusted by 500+ enterprises, NGOs, and public institutions across East Africa.",
+    "CPA OTENE & ASSOCIATES LLP is a professional accounting, audit, tax, risk advisory, and management consultancy firm based in Nairobi, Kenya. Trusted by 500+ enterprises, NGOs, and public institutions across East Africa.",
 };
 
 export default function HomePage() {
@@ -20,6 +21,7 @@ export default function HomePage() {
       <HeroSection />
       <StatsSection />
       <ServicesOverview />
+      <DownloadsSection />
       <WhyChooseUs />
       <IndustriesGrid />
       <Testimonials />

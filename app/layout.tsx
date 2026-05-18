@@ -15,51 +15,56 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.cpaotene.co.ke"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.cpaotene.com"),
   title: {
-    default: "CPA Otene & Associates LLP | Audit, Governance & Advisory Kenya",
-    template: "%s | CPA Otene & Associates LLP",
+    default: "CPA OTENE & ASSOCIATES LLP | Audit, Tax & Risk Advisory Services Kenya",
+    template: "%s | CPA OTENE & ASSOCIATES LLP",
   },
   description:
-    "CPA Otene and Associates LLP — Kenya's trusted audit, governance, tax, risk, and advisory firm. Serving enterprises, NGOs, public institutions, and growth-focused businesses across East Africa.",
+    "CPA OTENE & ASSOCIATES LLP is a professional accounting, audit, tax, risk advisory, and management consultancy firm based in Nairobi, Kenya. Serving enterprises, NGOs, public institutions, and growth-focused businesses across East Africa.",
   keywords: [
-    "audit firms Kenya",
-    "best audit firms Nairobi",
+    "audit services Kenya",
+    "tax advisory Kenya",
+    "accounting firm Nairobi",
+    "forensic audit Kenya",
+    "risk advisory services",
+    "management consultancy Kenya",
+    "CPA firm Nairobi",
     "governance advisory Kenya",
-    "tax consultants Kenya",
-    "ESG consultants East Africa",
     "IFRS advisory Kenya",
     "internal audit services Kenya",
-    "risk advisory Kenya",
-    "CPA firms Kenya",
+    "bookkeeping templates Kenya",
+    "accounting resources Kenya",
+    "ESG consultants East Africa",
+    "CPA OTENE",
     "professional accounting firms Kenya",
-    "CPA Otene",
   ],
-  authors: [{ name: "CPA Otene and Associates LLP" }],
-  creator: "CPA Otene and Associates LLP",
-  publisher: "CPA Otene and Associates LLP",
+  authors: [{ name: "CPA OTENE & ASSOCIATES LLP" }],
+  creator: "CPA OTENE & ASSOCIATES LLP",
+  publisher: "CPA OTENE & ASSOCIATES LLP",
   openGraph: {
     type: "website",
     locale: "en_KE",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.cpaotene.co.ke",
-    siteName: "CPA Otene and Associates LLP",
-    title: "CPA Otene & Associates LLP | Audit, Governance & Advisory Kenya",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.cpaotene.com",
+    siteName: "CPA OTENE & ASSOCIATES LLP",
+    title: "CPA OTENE & ASSOCIATES LLP | Audit, Tax & Risk Advisory Services Kenya",
     description:
-      "Kenya's premier audit, governance, tax, risk and advisory firm — building trust beyond numbers across East Africa.",
+      "Kenya's premier audit, tax, risk advisory, and management consultancy firm — building confidence beyond compliance across East Africa.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "CPA Otene and Associates LLP",
+        alt: "CPA OTENE & ASSOCIATES LLP",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "CPA Otene & Associates LLP | Audit, Governance & Advisory Kenya",
+    site: "@CPAOTENE_LLP",
+    title: "CPA OTENE & ASSOCIATES LLP | Audit, Tax & Risk Advisory Kenya",
     description:
-      "Kenya's premier audit, governance, tax, risk and advisory firm.",
+      "Kenya's premier audit, governance, tax, risk advisory, and management consultancy firm.",
     images: ["/og-image.jpg"],
   },
   robots: {
@@ -74,12 +79,17 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    shortcut: "/favicon-32x32.png",
     apple: "/apple-touch-icon.png",
-  },
-  verification: {
-    google: "your-google-site-verification",
+    other: [
+      { rel: "manifest", url: "/site.webmanifest" },
+    ],
   },
 };
 

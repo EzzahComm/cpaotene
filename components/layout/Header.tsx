@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -100,12 +101,12 @@ export function Header() {
             "flex items-center gap-6 text-xs",
             isScrolled || !isHomepage ? "text-charcoal-600" : "text-white/80"
           )}>
-            <a href="tel:+254700000000" className="flex items-center gap-1.5 hover:text-gold-500 transition-colors">
+            <a href="tel:+254747515972" className="flex items-center gap-1.5 hover:text-gold-500 transition-colors">
               <Phone size={11} />
-              +254 700 000 000
+              +254 747 515 972
             </a>
-            <a href="mailto:info@cpaotene.co.ke" className="hover:text-gold-500 transition-colors">
-              info@cpaotene.co.ke
+            <a href="mailto:info@cpaotene.com" className="hover:text-gold-500 transition-colors">
+              info@cpaotene.com
             </a>
           </div>
           <div className={cn(
@@ -129,23 +130,21 @@ export function Header() {
         <div className="container-enterprise">
           <div className="flex items-center justify-between h-18 py-4">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
-              <div className="w-10 h-10 bg-gradient-navy rounded-lg flex items-center justify-center shadow-enterprise-md group-hover:shadow-gold transition-all duration-300">
-                <span className="text-gold-400 font-bold text-sm font-heading">CPA</span>
-              </div>
-              <div>
-                <div className={cn(
-                  "font-bold text-sm leading-tight font-heading transition-colors",
-                  isScrolled || !isHomepage ? "text-navy-900" : "text-white"
-                )}>
-                  CPA OTENE
-                </div>
-                <div className={cn(
-                  "text-xs leading-tight transition-colors",
-                  isScrolled || !isHomepage ? "text-charcoal-500" : "text-white/70"
-                )}>
-                  & Associates LLP
-                </div>
+            <Link href="/" className="flex items-center flex-shrink-0 group" aria-label="CPA OTENE & ASSOCIATES LLP — Home">
+              <div className={cn(
+                "transition-all duration-300 rounded-xl px-3 py-1.5",
+                isScrolled || !isHomepage
+                  ? "bg-transparent"
+                  : "bg-white/95 shadow-enterprise-md"
+              )}>
+                <Image
+                  src="/logo.png"
+                  alt="CPA OTENE & ASSOCIATES LLP"
+                  width={160}
+                  height={44}
+                  className="h-10 w-auto object-contain"
+                  priority
+                />
               </div>
             </Link>
 
@@ -163,7 +162,7 @@ export function Header() {
                 onMouseEnter={() => handleMenuEnter("services")}
                 onMouseLeave={handleMenuLeave}
               >
-                <button className={cn(
+                <button type="button" className={cn(
                   "flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200",
                   isScrolled || !isHomepage
                     ? "text-charcoal-700 hover:text-navy-900 hover:bg-gray-50"
@@ -238,7 +237,7 @@ export function Header() {
                 onMouseEnter={() => handleMenuEnter("industries")}
                 onMouseLeave={handleMenuLeave}
               >
-                <button className={cn(
+                <button type="button" className={cn(
                   "flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200",
                   isScrolled || !isHomepage
                     ? "text-charcoal-700 hover:text-navy-900 hover:bg-gray-50"
@@ -296,6 +295,7 @@ export function Header() {
             {/* Right CTAs */}
             <div className="hidden xl:flex items-center gap-3">
               <button
+                type="button"
                 onClick={() => setSearchOpen(true)}
                 className={cn(
                   "p-2 rounded-lg transition-all duration-200",
@@ -317,6 +317,7 @@ export function Header() {
 
             {/* Mobile menu button */}
             <button
+              type="button"
               onClick={() => setMobileOpen(!mobileOpen)}
               className={cn(
                 "xl:hidden p-2 rounded-lg transition-all",
@@ -355,8 +356,8 @@ export function Header() {
                   <Link href="/contact" className="btn-primary w-full justify-center">
                     Talk to an Advisor
                   </Link>
-                  <a href="tel:+254700000000" className="flex items-center justify-center gap-2 text-sm text-charcoal-600">
-                    <Phone size={14} /> +254 700 000 000
+                  <a href="tel:+254747515972" className="flex items-center justify-center gap-2 text-sm text-charcoal-600">
+                    <Phone size={14} /> +254 747 515 972
                   </a>
                 </div>
               </div>
@@ -390,7 +391,7 @@ export function Header() {
                   placeholder="Search services, insights, industries..."
                   className="flex-1 text-base text-navy-900 placeholder:text-charcoal-400 outline-none"
                 />
-                <button onClick={() => setSearchOpen(false)} className="text-charcoal-400 hover:text-navy-900 transition-colors">
+                <button type="button" aria-label="Close search" onClick={() => setSearchOpen(false)} className="text-charcoal-400 hover:text-navy-900 transition-colors">
                   <X size={20} />
                 </button>
               </div>
@@ -479,6 +480,7 @@ function MobileSection({
   return (
     <div>
       <button
+        type="button"
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium text-charcoal-700 hover:bg-navy-50 transition-colors"
       >
