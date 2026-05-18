@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 
 const stats = [
   { value: 25, suffix: "+", label: "Years of Professional Excellence", description: "Decades of trusted advisory across Kenya and East Africa" },
-  { value: 500, suffix: "+", label: "Enterprise Clients", description: "From corporates to NGOs, government to private equity" },
+  { value: 20, suffix: "+", label: "Enterprise Clients", description: "From corporates to NGOs, government to private equity" },
   { value: 15, suffix: "+", label: "Industries Served", description: "Deep sector expertise across East Africa's economy" },
   { value: 98, suffix: "%", label: "Client Retention Rate", description: "Long-term partnerships built on trust and results" },
 ];
