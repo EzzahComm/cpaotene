@@ -6,19 +6,19 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-navy-900">
+    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-navy-500">
       {/* Animated background */}
       <div className="absolute inset-0">
         {/* Deep gradient base */}
         <div className="absolute inset-0 bg-gradient-hero" />
 
-        {/* Mesh overlays */}
-        <div className="absolute inset-0 opacity-30"
+        {/* Mesh overlays — keep subtle so nav text stays visible */}
+        <div className="absolute inset-0 opacity-20"
           style={{
             backgroundImage: `
-              radial-gradient(ellipse at 20% 50%, rgba(18, 61, 107, 0.6) 0%, transparent 60%),
-              radial-gradient(ellipse at 80% 20%, rgba(200, 162, 77, 0.15) 0%, transparent 50%),
-              radial-gradient(ellipse at 50% 100%, rgba(11, 31, 58, 0.8) 0%, transparent 40%)
+              radial-gradient(ellipse at 20% 50%, rgba(43, 95, 201, 0.5) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(200, 162, 77, 0.18) 0%, transparent 50%),
+              radial-gradient(ellipse at 50% 100%, rgba(17, 42, 106, 0.4) 0%, transparent 40%)
             `,
           }}
         />

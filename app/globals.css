@@ -125,7 +125,7 @@
 
   /* Hero gradient overlay */
   .hero-overlay {
-    background: linear-gradient(135deg, rgba(8, 24, 64, 0.97) 0%, rgba(26, 58, 138, 0.90) 60%, rgba(8, 24, 64, 0.88) 100%);
+    background: linear-gradient(135deg, rgba(26, 58, 138, 0.82) 0%, rgba(43, 95, 201, 0.75) 60%, rgba(26, 58, 138, 0.80) 100%);
   }
 
   /* Mesh background */

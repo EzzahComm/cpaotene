@@ -94,7 +94,7 @@ export function Header() {
       {/* Top bar */}
       <div className={cn(
         "hidden lg:block border-b transition-all duration-300",
-        isScrolled || !isHomepage ? "border-gray-100 bg-navy-50" : "border-white/10 bg-navy-900/90"
+        isScrolled || !isHomepage ? "border-gray-100 bg-navy-50" : "border-white/10 bg-navy-600/50"
       )}>
         <div className="container-enterprise flex justify-between items-center py-2">
           <div className={cn(
